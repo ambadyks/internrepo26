@@ -8,6 +8,30 @@
             --accent-2: #b90024;
             --line: rgba(22, 27, 34, 0.13);
             --shadow: 0 22px 70px rgba(18, 24, 38, 0.14);
+            --bg-gradient:
+                linear-gradient(115deg, rgba(227, 24, 55, 0.1), transparent 34rem),
+                radial-gradient(circle at 86% 10%, rgba(227, 24, 55, 0.13), transparent 27rem),
+                linear-gradient(180deg, #ffffff, #f7f8fb 62%, #ffffff);
+            --header-bg: rgba(255, 255, 255, 0.86);
+            --card-bg: rgba(255, 255, 255, 0.88);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f1115;
+            --panel: #161922;
+            --panel-soft: #1b1f29;
+            --text: #eef1f6;
+            --muted: #9aa3b2;
+            --accent: #ff4d63;
+            --accent-2: #ff7a8a;
+            --line: rgba(255, 255, 255, 0.12);
+            --shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
+            --bg-gradient:
+                linear-gradient(115deg, rgba(255, 77, 99, 0.08), transparent 34rem),
+                radial-gradient(circle at 86% 10%, rgba(255, 77, 99, 0.1), transparent 27rem),
+                linear-gradient(180deg, #0f1115, #121521 62%, #0f1115);
+            --header-bg: rgba(22, 25, 34, 0.86);
+            --card-bg: rgba(22, 25, 34, 0.88);
         }
 
         * {
@@ -23,12 +47,11 @@
         body {
             min-height: 100vh;
             font-family: Arial, Helvetica, sans-serif;
-            background:
-                linear-gradient(115deg, rgba(227, 24, 55, 0.1), transparent 34rem),
-                radial-gradient(circle at 86% 10%, rgba(227, 24, 55, 0.13), transparent 27rem),
-                linear-gradient(180deg, #ffffff, #f7f8fb 62%, #ffffff);
+            background: var(--bg-gradient);
+            background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         a {
@@ -46,11 +69,12 @@
             position: sticky;
             top: 16px;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.86);
+            background: var(--header-bg);
             border: 1px solid var(--line);
             border-radius: 8px;
             backdrop-filter: blur(16px);
             box-shadow: 0 12px 40px rgba(18, 24, 38, 0.12);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         header h1 {
@@ -88,6 +112,37 @@
         nav a.active:hover {
             color: #ffffff;
             background: var(--accent-2);
+        }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--panel-soft);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: rgba(227, 24, 55, 0.48);
+            background: rgba(227, 24, 55, 0.08);
+        }
+
+        .theme-toggle::before {
+            content: "\2600";
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        [data-theme="dark"] .theme-toggle::before {
+            content: "\1F319";
         }
 
         main {
@@ -187,9 +242,10 @@
             border-radius: 8px;
             background:
                 linear-gradient(135deg, rgba(227, 24, 55, 0.08), transparent 34%),
-                linear-gradient(180deg, #ffffff, #f3f5f8);
+                linear-gradient(180deg, var(--panel), var(--panel-soft));
             box-shadow: var(--shadow);
             overflow: hidden;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .myself-visual::before,
@@ -221,10 +277,11 @@
             flex-direction: column;
             gap: 12px;
             padding: 14px;
-            border: 1px solid rgba(22, 27, 34, 0.12);
+            border: 1px solid var(--line);
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.92);
+            background: var(--panel);
             box-shadow: 0 28px 80px rgba(18, 24, 38, 0.18);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .portrait-label {
@@ -286,11 +343,12 @@
 
         .info-card,
         .card {
-            background: rgba(255, 255, 255, 0.88);
+            background: var(--card-bg);
             border: 1px solid var(--line);
             border-radius: 8px;
             padding: 24px;
             box-shadow: 0 18px 45px rgba(18, 24, 38, 0.08);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .info-card strong,
@@ -319,13 +377,13 @@
             align-items: center;
             justify-content: center;
             padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             border: 1px solid var(--line);
             border-radius: 8px;
             color: var(--text);
             font-weight: 700;
             text-align: center;
-            transition: 0.2s ease;
+            transition: 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .skill:hover {
@@ -371,9 +429,9 @@
             padding: 18px;
             border: 1px solid var(--line);
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             text-decoration: none;
-            transition: 0.2s ease;
+            transition: 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .contact-link span {
