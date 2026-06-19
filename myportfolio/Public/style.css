@@ -94,7 +94,7 @@
             overflow: hidden;
         }
 
-        .hero {
+        .myself {
             width: min(1120px, calc(100% - 40px));
             min-height: calc(100vh - 112px);
             margin: 0 auto;
@@ -105,7 +105,7 @@
             gap: 52px;
         }
 
-        .eyebrow {
+        .oscilloscope {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -116,32 +116,32 @@
             text-transform: uppercase;
         }
 
-        .eyebrow::before {
+        .oscilloscope::before {
             content: "";
             width: 34px;
             height: 2px;
             background: var(--accent);
         }
 
-        .hero h2 {
+        .myself h2 {
             max-width: 740px;
             font-size: clamp(42px, 8vw, 82px);
             line-height: 0.98;
             margin-bottom: 24px;
         }
 
-        .hero h2 span {
+        .myself h2 span {
             color: var(--accent-2);
         }
 
-        .hero p {
+        .myself p {
             max-width: 650px;
             color: var(--muted);
             font-size: 19px;
             margin-bottom: 16px;
         }
 
-        .hero-actions {
+        .myself-actions {
             display: flex;
             align-items: center;
             gap: 14px;
@@ -180,7 +180,7 @@
             background: rgba(227, 24, 55, 0.08);
         }
 
-        .hero-visual {
+        .myself-visual {
             position: relative;
             min-height: 440px;
             border: 1px solid var(--line);
@@ -192,14 +192,14 @@
             overflow: hidden;
         }
 
-        .hero-visual::before,
-        .hero-visual::after {
+        .myself-visual::before,
+        .myself-visual::after {
             content: "";
             position: absolute;
             inset: 0;
         }
 
-        .hero-visual::before {
+        .myself-visual::before {
             background-image:
                 linear-gradient(rgba(227, 24, 55, 0.08) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(227, 24, 55, 0.08) 1px, transparent 1px);
@@ -207,7 +207,7 @@
             mask-image: linear-gradient(to bottom, black, transparent 86%);
         }
 
-        .hero-visual::after {
+        .myself-visual::after {
             background:
                 radial-gradient(circle at 42% 38%, rgba(227, 24, 55, 0.22), transparent 13rem),
                 radial-gradient(circle at 72% 72%, rgba(22, 27, 34, 0.08), transparent 12rem);
@@ -247,7 +247,7 @@
             box-shadow: 0 0 0 6px rgba(227, 24, 55, 0.12);
         }
 
-        .hero-portrait {
+        .myself-portrait {
             width: 100%;
             min-height: 0;
             flex: 1;
@@ -487,13 +487,13 @@
                 flex-direction: column;
             }
 
-            .hero {
+            .myself {
                 grid-template-columns: 1fr;
                 min-height: auto;
                 padding-top: 70px;
             }
 
-            .hero-visual {
+            .myself-visual {
                 min-height: 340px;
             }
 
@@ -508,7 +508,7 @@
 
         @media (max-width: 560px) {
             header,
-            .hero,
+            .myself,
             section,
             footer {
                 width: min(100% - 28px, 1120px);
@@ -524,17 +524,17 @@
                 padding: 7px 9px;
             }
 
-            .hero {
+            .myself {
                 padding: 58px 0 42px;
                 gap: 32px;
             }
 
-            .hero p,
+            .myself p,
             .section-intro {
                 font-size: 16px;
             }
 
-            .hero-actions {
+            .myself-actions {
                 align-items: stretch;
                 flex-direction: column;
             }
@@ -550,7 +550,7 @@
                 height: 42px;
             }
 
-            .hero-visual {
+            .myself-visual {
                 min-height: 280px;
             }
 
