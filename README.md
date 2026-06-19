@@ -1,6 +1,7 @@
 # internrepo26
 
-chumma irikatte
-changes added++
+internship 2026 ----:)
+
+------
 
 
