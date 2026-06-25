@@ -18,4 +18,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIOAMBADYKS }}
           channelId: live
           projectId: portfolioambadyks
-          entrypoint: ./myportfolio
+           entryPoint: ledweb/internproject
