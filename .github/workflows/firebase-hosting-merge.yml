@@ -15,7 +15,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIOAMBADYKS }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BULBCONTROLIOT }}
           channelId: live
-          projectId: portfolioambadyks
-           entryPoint: ledweb/internproject
+          projectId: bulbcontroliot
+          entryPoint: ledweb/internproject
