@@ -16,7 +16,7 @@ const int LED_PIN = 4;
 
 // Polling Variables
 unsigned long lastExecutionTime = 0;
-const unsigned long pollingInterval = 1500;
+const unsigned long pollingInterval = 100;
 
 void initWiFi() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);

@@ -3,102 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP32 LED Control</title>
+    <title>Relay Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #ffffff;
-            --accent-on: #00e676;
-            --accent-off: #ff1744;
-            --btn-hover: #333333;
+            --bg-color: #0b0e11;
+            --bg-grid: #11151a;
+            --card-bg: #15191e;
+            --card-border: #232931;
+            --text-color: #e8ebef;
+            --text-dim: #6b7280;
+            --text-faint: #4b5563;
+            --accent-on: #5ee6a8;
+            --accent-on-dim: rgba(94, 230, 168, 0.12);
+            --accent-off: #ff6b5e;
+            --accent-off-dim: rgba(255, 107, 94, 0.12);
+            --divider: #1f242b;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-color);
+            background-image:
+                linear-gradient(var(--bg-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+            background-size: 28px 28px;
             color: var(--text-color);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 24px;
         }
 
         .container {
             background-color: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            border: 1px solid var(--card-border);
+            padding: 2.25rem;
+            border-radius: 14px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
             width: 100%;
-            max-width: 350px;
+            max-width: 360px;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 1.1rem;
+        }
+
+        .eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-faint);
+            flex-shrink: 0;
+        }
+
+        .eyebrow.live .dot {
+            background: var(--accent-on);
+            box-shadow: 0 0 0 0 rgba(94, 230, 168, 0.6);
+            animation: pulse-dot 2s ease-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { box-shadow: 0 0 0 0 rgba(94, 230, 168, 0.5); }
+            70% { box-shadow: 0 0 0 6px rgba(94, 230, 168, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(94, 230, 168, 0); }
         }
 
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
+            margin: 0 0 0.25rem 0;
+            letter-spacing: -0.01em;
         }
 
-        p {
-            color: #888888;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
+        .subtitle {
+            color: var(--text-dim);
+            margin: 0 0 1.75rem 0;
+            font-size: 0.85rem;
         }
 
-        .status-container {
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+        .status-panel {
+            background: var(--bg-color);
+            border: 1px solid var(--divider);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-faint);
         }
 
         #status-text {
-            font-weight: bold;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.06em;
             transition: color 0.3s ease;
         }
 
         .btn {
             background-color: transparent;
-            border: 2px solid #444444;
+            border: 1.5px solid var(--card-border);
             color: var(--text-color);
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
+            padding: 14px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             outline: none;
             width: 100%;
+            letter-spacing: 0.01em;
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--text-dim);
+            outline-offset: 2px;
         }
 
         .btn.led-on {
             border-color: var(--accent-on);
             color: var(--accent-on);
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
+            background-color: var(--accent-on-dim);
         }
 
         .btn.led-off {
             border-color: var(--accent-off);
             color: var(--accent-off);
-            box-shadow: 0 0 15px rgba(255, 23, 68, 0.2);
+            background-color: var(--accent-off-dim);
         }
 
-        .btn:hover {
-            background-color: var(--btn-hover);
+        .btn:not(:disabled):hover {
+            filter: brightness(1.15);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .meta {
+            margin-top: 1.25rem;
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-faint);
+            letter-spacing: 0.02em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .eyebrow.live .dot {
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>PixaVolt Control</h1>
-        <p>Firebase IoT Dashboard</p>
-        
-        <div class="status-container">
-            LED Status: <span id="status-text">Connecting...</span>
+        <div class="eyebrow" id="conn-eyebrow">
+            <span class="dot"></span>
+            <span id="conn-text">Connecting</span>
         </div>
 
-        <button class="btn" id="led-button" disabled>Loading...</button>
+        <h1>Relay Control</h1>
+        <p class="subtitle">ESP32 device · channel 1</p>
+
+        <div class="status-panel">
+            <span class="status-label">State</span>
+            <span id="status-text">—</span>
+        </div>
+
+        <button class="btn" id="led-button" disabled>Loading…</button>
+
+        <div class="meta" id="device-id">DEVICE ID: —</div>
     </div>
 
     <script type="module">
@@ -123,24 +226,34 @@
 
         const ledButton = document.getElementById('led-button');
         const statusText = document.getElementById('status-text');
+        const connEyebrow = document.getElementById('conn-eyebrow');
+        const connText = document.getElementById('conn-text');
+        const deviceId = document.getElementById('device-id');
         let currentStatus = 0;
+
+        deviceId.textContent = 'PROJECT: ' + firebaseConfig.projectId;
 
         // Watch database for real-time changes
         onValue(ledRef, (snapshot) => {
             currentStatus = snapshot.val();
             ledButton.disabled = false;
+            connEyebrow.classList.add('live');
+            connText.textContent = 'Live';
 
             if (currentStatus === 1) {
                 statusText.innerText = "ON";
                 statusText.style.color = "var(--accent-on)";
-                ledButton.innerText = "Turn OFF";
+                ledButton.innerText = "Turn off";
                 ledButton.className = "btn led-on";
             } else {
                 statusText.innerText = "OFF";
                 statusText.style.color = "var(--accent-off)";
-                ledButton.innerText = "Turn ON";
+                ledButton.innerText = "Turn on";
                 ledButton.className = "btn led-off";
             }
+        }, () => {
+            connEyebrow.classList.remove('live');
+            connText.textContent = 'Connection lost';
         });
 
         // Push new value to database on click
