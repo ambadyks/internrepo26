@@ -26,3 +26,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GESTUREDETECTAI }}
           channelId: live
           projectId: gesturedetectai
+          entryPoint: gesture_detect_app
