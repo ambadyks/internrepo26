@@ -1,0 +1,25 @@
+Drill report for bridge_rectifier_kicad.kicad_pcb
+Created on 2026-06-26T14:55:25
+
+Copper Layer Stackup:
+    =============================================================
+    L1 :  F.Cu                      front
+    L2 :  B.Cu                      back
+
+
+Drill file 'bridge_rectifier_kicad-PTH-drl.gbr' contains
+    plated through holes:
+    =============================================================
+    T1  1.000mm  0.0394"  (2 holes))
+    T2  1.100mm  0.0433"  (8 holes))
+    T3  1.200mm  0.0472"  (2 holes))
+    T4  1.300mm  0.0512"  (4 holes))
+
+    Total plated holes count 16
+
+
+Drill file 'bridge_rectifier_kicad-NPTH-drl.gbr' contains
+    unplated through holes:
+    =============================================================
+
+    Total unplated holes count 0

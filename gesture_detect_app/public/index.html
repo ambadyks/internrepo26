@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MotionSense AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+    <div>
+
+        <h1>MotionSense AI</h1>
+
+        <p>
+            Real-Time Motion Gesture Classification
+        </p>
+
+    </div>
+
+    <button id="startBtn">
+
+        Enable Motion Sensors
+
+    </button>
+
+</header>
+
+<!-- STATUS -->
+
+<section class="statusGrid">
+
+    <div class="statusCard">
+
+        <span>Sensor Status</span>
+
+        <h3 id="sensorStatus">
+
+            Waiting
+
+        </h3>
+
+    </div>
+
+    <div class="statusCard">
+
+        <span>Model</span>
+
+        <h3 id="modelStatus">
+
+            Loading...
+
+        </h3>
+
+    </div>
+
+    <div class="statusCard">
+
+        <span>Motion Source</span>
+
+        <h3 id="sensorMode">
+
+            Unknown
+
+        </h3>
+
+    </div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="dashboard">
+
+    <div class="panel">
+
+        <h2>
+
+            Detected Gesture
+
+        </h2>
+
+        <div class="gesture">
+
+            <span id="prediction">
+
+                --
+
+            </span>
+
+        </div>
+
+        <div class="confidenceBox">
+
+            Confidence
+
+            <strong id="confidence">
+
+                0%
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>
+
+            Live Accelerometer
+
+        </h2>
+
+        <div class="sensorValues">
+
+            <div>
+
+                <small>X</small>
+
+                <h3 id="xValue">
+
+                    0.00
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <small>Y</small>
+
+                <h3 id="yValue">
+
+                    0.00
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <small>Z</small>
+
+                <h3 id="zValue">
+
+                    0.00
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GRAPH -->
+
+<section class="panel">
+
+    <div class="panelHeader">
+
+        <h2>
+
+            Live Motion Waveform
+
+        </h2>
+
+        <span id="fpsCounter">
+
+            0 FPS
+
+        </span>
+
+    </div>
+
+    <canvas id="waveCanvas"></canvas>
+
+</section>
+
+<!-- PROBABILITIES -->
+
+<section class="panel">
+
+    <h2>
+
+        Classification Scores
+
+    </h2>
+
+    <div class="probability">
+
+        <label>Circle</label>
+
+        <div class="progress">
+
+            <div class="fill"
+                 id="circleBar">
+
+            </div>
+
+        </div>
+
+        <span id="circleValue">
+
+            0%
+
+        </span>
+
+    </div>
+
+    <div class="probability">
+
+        <label>LeftRight</label>
+
+        <div class="progress">
+
+            <div class="fill"
+                 id="leftBar">
+
+            </div>
+
+        </div>
+
+        <span id="leftValue">
+
+            0%
+
+        </span>
+
+    </div>
+
+    <div class="probability">
+
+        <label>UpDown</label>
+
+        <div class="progress">
+
+            <div class="fill"
+                 id="upBar">
+
+            </div>
+
+        </div>
+
+        <span id="upValue">
+
+            0%
+
+        </span>
+
+    </div>
+
+    <div class="probability">
+
+        <label>Rest</label>
+
+        <div class="progress">
+
+            <div class="fill"
+                 id="restBar">
+
+            </div>
+
+        </div>
+
+        <span id="restValue">
+
+            0%
+
+        </span>
+
+    </div>
+
+</section>
+
+<!-- HISTORY -->
+
+<section class="panel">
+
+    <div class="panelHeader">
+
+        <h2>
+
+            Recent Predictions
+
+        </h2>
+
+        <button id="clearHistory">
+
+            Clear
+
+        </button>
+
+    </div>
+
+    <ul id="historyList">
+
+    </ul>
+
+</section>
+
+<footer>
+
+    Trained with Edge Impulse
+
+    <span>|</span>
+
+    Hosted on Firebase
+
+    <span>|</span>
+
+    Made by
+     Ambady K S
+
+
+
+</footer>
+
+<script src="edge-impulse-standalone.js"></script>
+
+<script src="run-impulse.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
